@@ -44,6 +44,7 @@
 		},
 
 		handleToggle: function () {
+			console.log('handleToggle');
 			if (this.$el.is(':checked')) {
 				this.checkAll();
 			} else {
