@@ -27,7 +27,20 @@
 			this.settings = $.extend({}, $.fn.everycheckbox.defaults, options);
 			this.$parent = this.$el.parents(this.settings.parentSelector);
 			this.$checkboxes = this.$parent.find('input[type="checkbox"]').not(this.$el);
-			this.$el.on('change', $.proxy(this.handleToggle, this));
+			// Do some event delegation to detect changes in checkboxes in general:
+			// (Uses proxy to bind "this" to our object.)
+			this.$parent.on('change', 'input[type=checkbox]', $.proxy(function (e) {
+				var $target = $(e.target);
+				// Only uncheck self is the target is not checked & "master toggle" is:
+				// (Couln't possibly be a change event in "master toggle")
+				if ($target.is(':not(:checked)') && this.$el.is(':checked')) {
+					this.uncheckSelf();
+				}
+				// If, on the other hand, the target is the "master toggle", trigger handler:
+				if (this.$el.is($target)) {
+					this.handleToggle();
+				}
+			}, this));
 		},
 
 		handleToggle: function () {
@@ -39,25 +52,21 @@
 		},
 
 		checkAll: function () {
-			var self = this;
-			this.$checkboxes.
-				attr('checked', 'checked').
-				on('change.everycheckbox', $.proxy(this.uncheckSelf, this));
+			this.$checkboxes.attr('checked', 'checked').trigger('change');
 		},
 		checkNone: function () {
-			this.$checkboxes.
-				removeAttr('checked').
-				off('change.everycheckbox');
+			this.$checkboxes.removeAttr('checked').trigger('change');
 		},
 		uncheckSelf: function () {
 			this.$el.removeAttr('checked');
 		}
 	};
 
-	$.fn.everycheckbox = function ( options ) {
+	// jQuery plugin definition:
+	$.fn.everycheckbox = function (options) {
 		return this.each(function () {
 			var $this = $(this),
-				data = $this.data('everycheckbox'),
+				data = $this.data('everycheckbox'), // If already initialized, nothing happens.
 				options = typeof options == 'object' && options;
 
 			if (!data) {
