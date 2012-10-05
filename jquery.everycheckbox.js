@@ -1,18 +1,19 @@
 /*
 * Tiny plugin to use a checkbox to toggle all/none in a collection
-* of checkboxes.
-* Example usage: $('input.my-master-toggle').everycheckbox();
+* of checkboxes. Applies to an enclosing element.
+* Example usage: $('.my-collection-of-inputs').everycheckbox();
 *
-* Invoking it on one "Master toggle" input element makes all checkboxes in
-* the collection to be checked when the master is checked.
+* Invoking it on a collection of input elements makes all checkboxes in
+* the collection to be checked when the master is checked. The master toggle
+* is configurable, default selector is "[data-master-toggle=true]".
 * When deselecting the master (when all checkboxes are checked),
 * all of the checkboxes are unchecked.
 * When at least one checkbox is unchecked, the "Master toggle" is unchecked.
 *
 * Options:
 * ========
-* parentSelector: a selector string to find the enclosing element housing the
-* group of selectors to be toggled. Default is "fieldset".
+* masterSelector: a selector string to find the master toggle input in the
+* group of selectors to be toggled. Default is "[data-master-toggle=true]".
 */
 
 !function ($) {
@@ -23,13 +24,14 @@
 	EveryCheckbox.prototype = {
 		constructor: EveryCheckbox,
 		init: function (element, options) {
-			this.$el = $(element);
+			this.$wrap = $(element);
 			this.settings = $.extend({}, $.fn.everycheckbox.defaults, options);
-			this.$parent = this.$el.parents(this.settings.parentSelector);
-			this.$checkboxes = this.$parent.find('input[type="checkbox"]').not(this.$el);
+			this.$el = this.$wrap.find(this.settings.masterSelector);
+
+			this.$checkboxes = this.$wrap.find('input[type="checkbox"]').not(this.$el);
 			// Do some event delegation to detect changes in checkboxes in general:
 			// (Uses proxy to bind "this" to our object.)
-			this.$parent.on('change', 'input[type=checkbox]', $.proxy(function (e) {
+			this.$wrap.on('change', 'input[type=checkbox]', $.proxy(function (e) {
 				var $target = $(e.target);
 				// Only uncheck self is the target is not checked & "master toggle" is:
 				// (Couln't possibly be a change event in "master toggle")
@@ -44,7 +46,6 @@
 		},
 
 		handleToggle: function () {
-			console.log('handleToggle');
 			if (this.$el.is(':checked')) {
 				this.checkAll();
 			} else {
@@ -67,11 +68,12 @@
 	$.fn.everycheckbox = function (options) {
 		return this.each(function () {
 			var $this = $(this),
-				data = $this.data('everycheckbox'), // If already initialized, nothing happens.
-				options = typeof options == 'object' && options;
+				data = $this.data('everycheckbox'), // Set data to previous plugin data, if existing.
+				opts = (typeof options == 'object' && options); // Returns options if options are object, else false.
 
+			// If no previous data, initialize new plugin data:
 			if (!data) {
-				$this.data('everycheckbox', (data = new EveryCheckbox(this, options)));
+				$this.data('everycheckbox', (data = new EveryCheckbox(this, opts)));
 			}
 		});
 	};
@@ -79,6 +81,6 @@
 	$.fn.everycheckbox.Constructor = EveryCheckbox;
 
 	$.fn.everycheckbox.defaults = {
-		'parentSelector': 'fieldset'
+		masterSelector: '[data-master-toggle=true]'
 	};
 }(window.jQuery);

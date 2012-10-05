@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Tests for everycheckbox</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jquery.everycheckbox.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			$('.wrap-1').everycheckbox();
+			$('.wrap-2').everycheckbox({ masterSelector: '#mymaster' });
+		})
+	</script>
+</head>
+<body>
+	<div class="wrap-1">
+		<h1>Using default value (uses data-attribute on input)</h1>
+		<ul>
+			<li><label><input data-master-toggle="true" type="checkbox"> Toggle all/none</label></li>
+			<li><label><input type="checkbox"> My checkbox 1</label></li>
+			<li><label><input type="checkbox"> My checkbox 2</label></li>
+			<li><label><input type="checkbox"> My checkbox 3</label></li>
+			<li><label><input type="checkbox"> My checkbox 4</label></li>
+			<li><label><input type="checkbox"> My checkbox 5</label></li>
+		</ul>
+	</div>
+
+	<div class="wrap-2">
+		<h1>Using ID on input for master toggle, via options:</h1>
+		<ul>
+			<li><label><input id="mymaster" type="checkbox"> Toggle all/none</label></li>
+			<li><label><input type="checkbox"> My checkbox 1</label></li>
+			<li><label><input type="checkbox"> My checkbox 2</label></li>
+			<li><label><input type="checkbox"> My checkbox 3</label></li>
+			<li><label><input type="checkbox"> My checkbox 4</label></li>
+			<li><label><input type="checkbox"> My checkbox 5</label></li>
+		</ul>
+	</div>
+</body>
+</html>
