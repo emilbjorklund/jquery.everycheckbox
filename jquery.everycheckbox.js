@@ -17,6 +17,8 @@
 */
 
 !function ($) {
+	"use strict";
+
 	var EveryCheckbox = function (element, options) {
 		this.init(element, options);
 	};
@@ -54,13 +56,13 @@
 		},
 
 		checkAll: function () {
-			this.$checkboxes.attr('checked', 'checked').trigger('change');
+			this.$checkboxes.prop('checked', true).trigger('change');
 		},
 		checkNone: function () {
-			this.$checkboxes.removeAttr('checked').trigger('change');
+			this.$checkboxes.prop('checked', false).trigger('change');
 		},
 		uncheckSelf: function () {
-			this.$el.removeAttr('checked');
+			this.$el.prop('checked', false);
 		}
 	};
 
