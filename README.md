@@ -4,6 +4,8 @@ What is everycheckbox?
 Tiny plugin to use a checkbox to toggle all/none in a collection
 of checkboxes. Applies to an enclosing element.
 
+It is mostly an experiment that I have used to try out various coding tools, and thus a bit silly.
+
 Example usage: `$('.my-collection-of-inputs').everycheckbox();`
 Another example: `$('.my-collection-of-inputs').everycheckbox({masterSelector: '#mymaster'});`
 
