@@ -1,0 +1,33 @@
+{
+  "name": "jquery-everycheckbox",
+  "version": "0.0.0",
+  "description": "A small jquery-plugin to toggle checkboxes, and a learning project.",
+  "main": "src/jquery.everycheckbox.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "qunitjs": "~1.11.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/emilbjorklund/jquery.everycheckbox.git"
+  },
+  "keywords": [
+    "jquery",
+    "forms",
+    "checkbox"
+  ],
+  "author": "Emil Björklund",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "de0d81e7effe5e0373f3e0d5746f2dbbe48fcc82",
+  "bugs": {
+    "url": "https://github.com/emilbjorklund/jquery.everycheckbox/issues"
+  }
+}
