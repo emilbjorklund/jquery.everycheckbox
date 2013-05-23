@@ -16,7 +16,7 @@
 * group of selectors to be toggled. Default is "[data-master-toggle=true]".
 */
 
-!function ($) {
+;(function ($) {
 	"use strict";
 
 	var EveryCheckbox = function (element, options) {
@@ -26,14 +26,14 @@
 	EveryCheckbox.prototype = {
 		constructor: EveryCheckbox,
 		init: function (element, options) {
-			this.$wrap = $(element);
+			var $wrap = $(element);
 			this.settings = $.extend({}, $.fn.everycheckbox.defaults, options);
-			this.$el = this.$wrap.find(this.settings.masterSelector);
+			this.$el = $wrap.find(this.settings.masterSelector);
 
-			this.$checkboxes = this.$wrap.find('input[type="checkbox"]').not(this.$el);
+			this.$checkboxes = $wrap.find('input[type="checkbox"]').not(this.$el);
 			// Do some event delegation to detect changes in checkboxes in general:
 			// (Uses proxy to bind "this" to our object.)
-			this.$wrap.on('change', 'input[type=checkbox]', $.proxy(function (e) {
+			$wrap.on('change', 'input[type=checkbox]', $.proxy(function (e) {
 				var $target = $(e.target);
 				// Only uncheck self is the target is not checked & "master toggle" is:
 				// (Couln't possibly be a change event in "master toggle")
@@ -80,9 +80,7 @@
 		});
 	};
 
-	$.fn.everycheckbox.Constructor = EveryCheckbox;
-
 	$.fn.everycheckbox.defaults = {
 		masterSelector: '[data-master-toggle=true]'
 	};
-}(window.jQuery);
+}(window.jQuery));
