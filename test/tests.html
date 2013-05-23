@@ -2,39 +2,28 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title>Tests for everycheckbox</title>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script type="text/javascript" src="jquery.everycheckbox.js"></script>
-	<script type="text/javascript">
-		$(function () {
-			$('.wrap-1').everycheckbox();
-			$('.wrap-2').everycheckbox({ masterSelector: '#mymaster' });
-		})
-	</script>
+	<title>Tests for jquery.everycheckbox</title>
+	<link rel="stylesheet" href="../node_modules/qunitjs/qunit/qunit.css">
+	<script src="../node_modules/qunitjs/qunit/qunit.js"></script>
+	<script src="vendor/jquery/jquery.js"></script>
+	<script src="../src/jquery.everycheckbox.js"></script>
+	<script src="test.jquery.everycheckbox.js"></script>
 </head>
 <body>
-	<div class="wrap-1">
-		<h1>Using default value (uses data-attribute on input)</h1>
-		<ul>
-			<li><label><input data-master-toggle="true" type="checkbox"> Toggle all/none</label></li>
-			<li><label><input type="checkbox"> My checkbox 1</label></li>
-			<li><label><input type="checkbox"> My checkbox 2</label></li>
-			<li><label><input type="checkbox"> My checkbox 3</label></li>
-			<li><label><input type="checkbox"> My checkbox 4</label></li>
-			<li><label><input type="checkbox"> My checkbox 5</label></li>
-		</ul>
-	</div>
-
-	<div class="wrap-2">
-		<h1>Using ID on input for master toggle, via options:</h1>
-		<ul>
-			<li><label><input id="mymaster" type="checkbox"> Toggle all/none</label></li>
-			<li><label><input type="checkbox"> My checkbox 1</label></li>
-			<li><label><input type="checkbox"> My checkbox 2</label></li>
-			<li><label><input type="checkbox"> My checkbox 3</label></li>
-			<li><label><input type="checkbox"> My checkbox 4</label></li>
-			<li><label><input type="checkbox"> My checkbox 5</label></li>
-		</ul>
-	</div>
+	<div id="qunit"></div>
+    <div id="qunit-fixture">
+    	<div id="checkboxes-default">
+    		<input type="checkbox" data-master-toggle="true">
+    		<input type="checkbox">
+    		<input type="checkbox">
+    		<input type="checkbox">
+    	</div>
+    	<div id="checkboxes-custom">
+    		<input type="checkbox" id="data-master-toggle">
+    		<input type="checkbox">
+    		<input type="checkbox">
+    		<input type="checkbox">
+    	</div>
+    </div>
 </body>
 </html>
