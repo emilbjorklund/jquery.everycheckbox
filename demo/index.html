@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jquery.everycheckbox demo</title>
+	<script src="../test/vendor/jquery/jquery.js"></script>
+	<script src="../src/jquery.everycheckbox.js"></script>
+</head>
+<body>
+	<h1>Demo of Everycheckbox jQuery plugin</h1>
+
+	<p>Click the master toggle to toggle all/none of the checkboxes.</p>
+	<p>Unchecking the a checked box also unchecks the master.</p>
+	
+	<p>Add <code>data-master-toggle=&quot;true&quot;</code> to the element that is the master toggle, or pass in a selector for the element that you want to make the master toggle as the value for the <code>masterSelector</code> option.</p>
+	<p>Call the plugin on the element enclosing the checkboxes, like so:</p>
+
+	<pre><code>$('.check').everycheckbox();</code></pre>
+
+	<fieldset class="check">
+		<legend>Please select any that apply</legend>
+		<input type="checkbox" id="master-toggle" data-master-toggle="true"><label for="master-toggle">Toggle all/none</label>
+		<input type="checkbox" id="ch1"><label for="ch1">Monkey see</label>
+		<input type="checkbox" id="ch2"><label for="ch2">Monkey do</label>
+		<input type="checkbox" id="ch3"><label for="ch3">Monkey needs a cigarette</label>
+	</fieldset>
+
+	<p>This fieldset doesn't have a <code>data-master-toggle</code> marker, but is activated by passing in the ID of the field as a jQuery selector to act as master toggle instead, using this code:</p>
+	<pre><code>$('.check-custom').everycheckbox({
+			masterSelector: '#master-toggle-custom'
+		});</code></pre>
+
+	<fieldset class="check-custom">
+		<legend>Please select any that apply</legend>
+		<input type="checkbox" id="master-toggle-custom"><label for="master-toggle-custom">Toggle all/none</label>
+		<input type="checkbox" id="ch4"><label for="ch4">Blue</label>
+		<input type="checkbox" id="ch5"><label for="ch5">No, red!</label>
+		<input type="checkbox" id="ch6"><label for="ch6">Green is quite nice.</label>
+	</fieldset>
+	<script>
+	$(function () {
+		$('.check').everycheckbox();
+		$('.check-custom').everycheckbox({
+			masterSelector: '#master-toggle-custom'
+		});
+	});
+	</script>
+</body>
+</html>
