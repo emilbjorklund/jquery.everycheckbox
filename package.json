@@ -1,6 +1,6 @@
 {
   "name": "jquery-everycheckbox",
-  "version": "0.0.0",
+  "version": "0.1.1",
   "description": "A small jquery-plugin to toggle checkboxes, and a learning project.",
   "main": "src/jquery.everycheckbox.js",
   "directories": {
